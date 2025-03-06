@@ -1,0 +1,100 @@
+### installations for local development
+
+## initial config with WSL
+    WSL --install # to use ubuntu/linux promtp in windows
+    En WSL
+        sudo apt install make
+        sudo apt-get update
+        sudo apt install python3.11-venv
+
+## creation of a new enviroment
+
+# current directory of the project
+cd C:\Users\santt\Desktop\DDT_risk_project
+
+# virtual enviroment creation
+python3 -m venv ~/.DDT_risk_project
+
+## create scaffolding 
+
+# generic
+Project_app/
+    ├── Makefile
+    ├── Dockerfile
+    ├── requirements.txt
+    ├── app/
+    │   ├── main.py
+    │   └── module1.py
+    │   └── model/
+    │       └── model.pkl
+    └── tests/
+        └── test_module1.py
+
+## venv activation
+source ~/.DDT_risk_project/bin/activate
+
+## requirements 
+
+# writing from notebook in the root
+
+pip install pipreqs
+cd C:\Users\santt\Desktop\DDT_risk_project
+pipreqs . --force
+
+# or inside the notebook itself
+
+!pip install pipreqs
+!pipreqs C:\Users\santt\Desktop\DDT_risk_project\ --force
+
+# add to requirements.txt
+flake8==6.1.0
+
+# (optional) intallation
+pip install -r requirements.txt
+
+## Makefile execution
+make install
+make lint
+make run
+
+### Not used
+
+# install dependencies(?) or do it with Makefile directly
+pip install -r requirements.txt
+
+# freeze requirements
+pip freeze > requirements.txt
+
+###################################
+###################################
+
+### Docker
+
+# Writing Dockerfile 
+
+Choosing python image from Docker hub: 
+
+e.g.: python:3.11-bullseye
+
+# Dockerfile
+'''
+FROM python:3.11-bullseye
+
+WORKDIR /fk_fraud_model_app
+
+COPY . /fk_fraud_model_app
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+WORKDIR /fk_fraud_model_app/app
+
+EXPOSE 5000
+
+CMD ["python", "main.py"]
+'''
+
+$ docker build -t risk_synth:v00 .
+
+$ docker run --name risk_backend -p 5000:5000 risk_synth:v00
+
+
