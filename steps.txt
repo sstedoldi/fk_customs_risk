@@ -9,47 +9,17 @@
 
 ## creation of a new enviroment
 
-# current directory of the project
-cd C:\Users\santt\Desktop\DDT_risk_project
-
 # virtual enviroment creation
-python3 -m venv ~/.DDT_risk_project
-
-## create scaffolding 
-
-# generic
-Project_app/
-    ├── Makefile
-    ├── Dockerfile
-    ├── requirements.txt
-    ├── app/
-    │   ├── main.py
-    │   └── module1.py
-    │   └── model/
-    │       └── model.pkl
-    └── tests/
-        └── test_module1.py
+python3.11 -m venv ~/.customs_risk
 
 ## venv activation
-source ~/.DDT_risk_project/bin/activate
+source ~/.customs_risk/bin/activate
 
 ## requirements 
 
 # writing from notebook in the root
 
-pip install pipreqs
-cd C:\Users\santt\Desktop\DDT_risk_project
-pipreqs . --force
-
-# or inside the notebook itself
-
-!pip install pipreqs
-!pipreqs C:\Users\santt\Desktop\DDT_risk_project\ --force
-
-# add to requirements.txt
-flake8==6.1.0
-
-# (optional) intallation
+pip install --upgrade pip
 pip install -r requirements.txt
 
 ## Makefile execution
@@ -91,7 +61,7 @@ WORKDIR /fk_fraud_model_app/app
 EXPOSE 5000
 
 CMD ["python", "main.py"]
-'''
+''
 
 $ docker build -t risk_synth:v00 .
 

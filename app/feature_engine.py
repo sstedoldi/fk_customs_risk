@@ -299,9 +299,10 @@ class Feature_engine(BaseEstimator, TransformerMixin):
                 self.tariff_code_stats = pd.read_csv(os.path.join(self.stats_tables_path,'tariff_stats.csv'), index_col=0)
                 self.tariff_code_stats.index = self.tariff_code_stats.index.astype(str)
                 print("Stats information read\n")
-            except:
+            except Exception as e:
                 self.tariff_code_stats = pd.DataFrame()
-                print("Imposible to read tariff codes stats information\n")
+                print("Imposible to read tariff codes stats information")
+                print("Error:", e)
 
             print('------------------------')
 
@@ -315,9 +316,10 @@ class Feature_engine(BaseEstimator, TransformerMixin):
                 
                 print('------------------------')
 
-            except:
+            except Exception as e:
                 self.code_activity = {}
                 print("Imposible to read code's activity information\n")
+                print("Error:", e)
 
         elif self.stats_and_act_work == 'process':
             print('## Processing tariff codes stats information')
